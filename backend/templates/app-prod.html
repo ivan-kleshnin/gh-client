@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link href="//robohash.org" rel="dns-prefetch"/>
+  <link href="/public/bundle.css?{{ hashes.bundleCss }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+  <main id="app">
+    <div class="gear lg">
+      <i class="fa fa-cog fa-spin"></i>
+    </div>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+
+  <script src="/public/vendors.js?{{ hashes.vendorsJs }}"></script>
+  <script src="/public/bundle.js?{{ hashes.bundleJs }}"></script>
+{% endblock %}
