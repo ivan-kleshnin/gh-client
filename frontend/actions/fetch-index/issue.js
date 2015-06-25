@@ -31,7 +31,7 @@ export default function fetchIndex(owner, repo) {
       modelCursor.select("models").merge(toObject(newModels, "number"));
       modelCursor.merge({
         loading: false,
-        loadError: false
+        loadError: undefined
       });
 
       return response.status;

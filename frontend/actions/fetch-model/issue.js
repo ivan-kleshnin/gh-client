@@ -27,7 +27,7 @@ export default function fetchModel(number) {
       modelCursor.select("models").set(number, model);
       modelCursor.merge({
         loading: false,
-        loadError: false
+        loadError: undefined
       });
 
       return response.status;
