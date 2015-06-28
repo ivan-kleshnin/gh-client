@@ -8,8 +8,6 @@ import {router} from "frontend/router";
 import modelActions from "frontend/actions/issue";
 import {ShallowComponent, DeepComponent} from "frontend/components/component";
 
-import "frontend/components/index/index.less";
-
 // COMPONENTS ======================================================================================
 export default class IssueHome extends DeepComponent {
   render() {
@@ -25,17 +23,17 @@ export default class IssueHome extends DeepComponent {
 
 class Actions extends ShallowComponent {
   render() {
-    let owner = <div className="form-group">
+    let ownerComponent = <div className="form-group">
       <label htmlFor="owner">Owner&nbsp;</label>
       <input type="text" id="owner" ref="owner" className="form-control"/>
     </div>;
 
-    let repo = <div className="form-group">
+    let repoComponent = <div className="form-group">
       <label htmlFor="repo">&nbsp;Repo&nbsp;</label>
       <input type="text" id="repo" ref="repo" className="form-control"/>
     </div>;
 
-    let load = <div className="form-group">
+    let loadComponent = <div className="form-group">
       &nbsp;<button type="button" className="btn btn-primary"
         onClick={() => this.load()}>
         Load
@@ -46,9 +44,9 @@ class Actions extends ShallowComponent {
       <div className="actions">
         <div className="container container-sm">
           <div className="form-inline">
-            {owner}
-            {repo}
-            {load}
+            {ownerComponent}
+            {repoComponent}
+            {loadComponent}
           </div>
         </div>
       </div>
@@ -61,7 +59,5 @@ class Actions extends ShallowComponent {
     if (owner && repo) {
       router.transitionTo("issue-index", {owner, repo});
     }
-
-    // TODO error check
   }
 }

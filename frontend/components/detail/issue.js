@@ -31,7 +31,12 @@ export default class IssueDetail extends DeepComponent {
     if (loading) {
       return <Loading/>;
     } else if (loadError) {
-      return <Error loadError={loadError}/>;
+      return (
+        <div>
+          <Actions {...this.props}/>
+          <Error loadError={loadError}/>
+        </div>
+      );
     } else {
       return (
         <DocumentTitle title={owner + "/" + repo + "/" + model.number}>

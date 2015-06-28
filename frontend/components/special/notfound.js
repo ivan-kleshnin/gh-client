@@ -7,7 +7,7 @@ export default class NotFound extends Component {
   render() {
     return (
       <DocumentTitle title="Not Found">
-        <section className="container page">
+        <section className="container container-sm">
           <h1>Page not Found</h1>
           <p>Something is wrong</p>
         </section>

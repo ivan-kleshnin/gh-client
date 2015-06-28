@@ -8,10 +8,10 @@ import alertActions from "frontend/actions/alert";
 let modelCursor = state.select("issues");
 
 // ACTIONS =========================================================================================
-export default function fetchModel(number) {
+export default function fetchModel(owner, repo, number) {
   console.debug(`fetchModel(${number})`);
 
-  let url = `https://api.github.com/repos/Paqmind/react-ultimate/issues/${number}`;
+  let url = `https://api.github.com/repos/${owner}/${repo}/issues/${number}`;
 
   modelCursor.set("loading", true);
 
@@ -46,7 +46,14 @@ export default function fetchModel(number) {
         });
 
         // Add alert
-        alertActions.addModel({message: "Action `Issue:fetchModel` failed: " + response.statusText, category: "error"});
+        if (String(response.status).startsWith("4")) {
+          // Special
+          alertActions.addModel({message: `Failed to load ${owner}/${repo} page`, category: "warning", expire: 0});
+        } else {
+          // Generic
+          alertActions.addModel({message: "Action `Issue:fetchModel` failed: " + response.statusText, category: "error"});
+        }
+
         return response.status;
       }
     });

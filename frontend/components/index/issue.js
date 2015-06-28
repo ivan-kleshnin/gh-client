@@ -6,13 +6,15 @@ import DocumentTitle from "react-document-title";
 import {branch} from "baobab-react/decorators";
 import {toArray} from "shared/helpers/common";
 import {statics} from "frontend/helpers/react";
+import state from "frontend/state";
 import {router} from "frontend/router";
 import modelActions from "frontend/actions/issue";
 import {ShallowComponent, DeepComponent} from "frontend/components/component";
 import {Error, Loading, NotFound} from "frontend/components/special";
 import IssueItem from "frontend/components/item/issue";
 
-import "frontend/components/index/index.less";
+// CURSORS =========================================================================================
+let modelCursor = state.select("issues");
 
 // COMPONENTS ======================================================================================
 @statics({
@@ -28,7 +30,12 @@ export default class IssueIndex extends DeepComponent {
     let {owner, repo, models, loading, loadError} = this.props.issues;
 
     if (loadError) {
-      return <Error loadError={loadError}/>;
+      return (
+        <div>
+          <Actions {...this.props}/>
+          <Error loadError={loadError}/>
+        </div>
+      );
     } else {
       return (
         <DocumentTitle title={owner + "/" + repo}>
@@ -86,11 +93,13 @@ class Actions extends ShallowComponent {
     let owner = React.findDOMNode(this.refs.owner).value;
     let repo = React.findDOMNode(this.refs.repo).value;
     if (owner && repo) {
-      modelActions.establishIndex();
+      if (owner != modelCursor.get("owner") || repo != modelCursor.get("repo")) {
+        router.transitionTo("issue-index", {owner, repo});
+      } else {
+        modelActions.establishIndex();
+      }
     } else {
       router.transitionTo("issue-home");
     }
-
-    // TODO error check
   }
 }
