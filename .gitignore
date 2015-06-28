@@ -3,8 +3,11 @@
 /public/
 /ignore/
 /logs/
-/shared/config/development.js
+/shared/config/*.js
 /test*.js
+
+!/shared/config/.default.js
+!/shared/config/readme.txt
 
 # BY MASK ------------------------------------------------------------------------------------------
 *.iml

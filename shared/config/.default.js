@@ -3,8 +3,8 @@ import Path from "path";
 // CONFIG ==========================================================================================
 export default {
   // HTTP
-  "http-port": 80,
-  "http-use-etag": true,
+  "http-port": 3000,
+  "http-use-etag": false,
 
   // SMTP
   "smtp-host": "localhost",
