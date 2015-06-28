@@ -1,5 +1,5 @@
 import Path from "path";
-import {assoc, map, reduce, merge} from "ramda";
+import {assoc, map, reduce} from "ramda";
 import Webpack from "webpack";
 import ExtractTextPlugin from "extract-text-webpack-plugin";
 import {Base64} from "js-base64";
@@ -13,24 +13,18 @@ const BACKEND_DIR = Path.join(__dirname, "backend");
 const PUBLIC_DIR = Path.join(__dirname, "public");
 
 // Paths to minified library distributions relative to the root node_modules
-const MINIFIED_DEPS = [
+const MINIFIED_DEPS = Object.freeze([
   "moment/min/moment.min.js",
-];
+]);
 
-let define = {
-  "process.env": JSON.stringify({
-    "NODE_ENV": process.env.NODE_ENV
-  }),
-  "config": JSON.stringify({}),
-};
-
-if (Config.has("api-user-name") && Config.has("api-user-pass")) {
-  define = merge(define, {
-    "config": JSON.stringify({
-      "api-auth": "Basic " + Base64.encode(Config.get("api-user-name") + ":" + Config.get("api-user-pass")),
-    })
-  });
-}
+const DEFINE = Object.freeze({
+  "process.env": {
+    "NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+  },
+  "config": {
+    "api-auth": JSON.stringify((Config.has("api-user-name") && Config.has("api-user-pass")) ? "Basic " + Base64.encode(Config.get("api-user-name") + ":" + Config.get("api-user-pass")) : undefined),
+  },
+});
 
 // CONFIG ==========================================================================================
 export default {
@@ -79,7 +73,7 @@ export default {
 
     loaders: [ // http://webpack.github.io/docs/loaders.html
       // JS
-      {test: /\.(js(\?.*)?)$/, loaders: ["react-hot", "babel?stage=0"], exclude: /node_modules/},
+      {test: /\.(js(\?.*)?)$/, loaders: ["babel?stage=0"], exclude: /node_modules/},
 
       // JSON
       {test: /\.(json(\?.*)?)$/,  loaders: ["json"]},
@@ -148,7 +142,7 @@ export default {
     new Webpack.IgnorePlugin(/^vertx$/),
     new Webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js"),
     new ExtractTextPlugin("[name].css"),
-    new Webpack.DefinePlugin(define),
+    new Webpack.DefinePlugin(DEFINE),
   ],
 
   // Include polyfills or mocks for various node stuff http://webpack.github.io/docs/configuration.html#node

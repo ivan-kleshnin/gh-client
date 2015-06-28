@@ -3,7 +3,6 @@ import Path from "path";
 import {assoc, map, reduce} from "ramda";
 import Webpack from "webpack";
 import ExtractTextPlugin from "extract-text-webpack-plugin";
-import SaveAssetsJsonPlugin from "assets-webpack-plugin";
 import {Base64} from "js-base64";
 import Config from "config";
 
@@ -19,21 +18,16 @@ const MINIFIED_DEPS = Object.freeze([
   "moment/min/moment.min.js",
 ]);
 
+const DEFINE = Object.freeze({
+  "process.env": {
+    "NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+  },
+  "config": {
+    "api-auth": JSON.stringify((Config.has("api-user-name") && Config.has("api-user-pass")) ? "Basic " + Base64.encode(Config.get("api-user-name") + ":" + Config.get("api-user-pass")) : undefined),
+  },
+});
+
 const AUTOPREFIXER = "autoprefixer?{browsers: ['> 5%']}";
-
-let define = {
-  "process.env": JSON.stringify({
-    "NODE_ENV": process.env.NODE_ENV
-  }),
-};
-
-if (Config.has("api-user-name") && Config.has("api-user-pass")) {
-  define = merge(define, {
-    "config": JSON.stringify({
-      "api-auth": "Basic " + Base64.encode(Config.get("api-user-name") + ":" + Config.get("api-user-pass")),
-    })
-  });
-}
 
 // CONFIG ==========================================================================================
 export default {
@@ -152,7 +146,7 @@ export default {
     new Webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js?[chunkhash]"),
     new Webpack.optimize.UglifyJsPlugin({mangle: {except: ["$", "window", "document", "console"]}}),
     new ExtractTextPlugin("[name].css?[contenthash]"),
-    new Webpack.DefinePlugin(define),
+    new Webpack.DefinePlugin(DEFINE),
     function () {
       this.plugin("done", function (stats) {
         let jsonStats = stats.toJson({
