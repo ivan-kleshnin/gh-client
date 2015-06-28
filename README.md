@@ -4,7 +4,7 @@
 
 ```
 $ wget https://github.com/ivan-kleshnin/git-issues/archive/master.zip; unzip master.zip -d git-issues; rm master.zip
-$ cd react-ultimate
+$ cd git-issues
 $ npm install; bower install; bin/install
 ```
 
