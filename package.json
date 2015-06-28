@@ -14,7 +14,6 @@
     "test-watch": "NODE_ENV=testing NODE_CONFIG_DIR=shared/config mocha --opts specs/mocha.opts -w specs"
   },
   "dependencies": {
-    "assets-webpack-plugin": "^2.0.0",
     "autoprefixer-loader": "^2.0.0",
     "axios": "^0.5.4",
     "babel": "^5.4.7",
