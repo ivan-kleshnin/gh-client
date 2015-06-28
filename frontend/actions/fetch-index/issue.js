@@ -50,10 +50,15 @@ export default function fetchIndex(owner, repo) {
         });
 
         // Add alert
-        alertActions.addModel({message: "Action `Issue:fetchPage` failed: " + response.statusText, category: "error"});
+        if (String(response.status).startsWith("4")) {
+          // Special
+          alertActions.addModel({message: `Failed to load ${owner}/${repo} page`, category: "warning", expire: 0});
+        } else {
+          // Generic
+          alertActions.addModel({message: "Action `Issue:fetchIndex` failed: " + response.statusText, category: "error"});
+        }
+
         return response.status;
       }
     });
 }
-
-

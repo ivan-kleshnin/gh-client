@@ -1,4 +1,3 @@
-import {filter, slice} from "ramda";
 import Axios from "axios";
 import state from "frontend/state";
 import fetchIndex from "frontend/actions/fetch-index/issue";

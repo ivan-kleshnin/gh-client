@@ -28,19 +28,35 @@ window._state = new Baobab(
       number: undefined,
     },
 
-    //alerts: {
-    //  // DATA
-    //  models: {},
-    //
-    //  // LOAD ARTEFACTS
-    //  loading: true,
-    //  loadError: undefined,
-    //},
+    alerts: {
+      // DATA
+      models: {},
+
+      // LOAD ARTEFACTS
+      loading: false,
+      loadError: undefined,
+    },
   },
   { // OPTIONS
     syncwrite: true,
 
     facets: {
+      currentAlerts: {
+        cursors: {
+          alerts: "alerts",
+        },
+
+        get(data) {
+          let {models} = data.alerts;
+          let modelsArray = values(models);
+          if (modelsArray.length) {
+            return sortBy(m => m.createdDate, modelsArray);
+          } else {
+            return [];
+          }
+        }
+      },
+
       currentIssue: {
         cursors: {
           issues: "issues",
