@@ -3,7 +3,7 @@
 /public/
 /ignore/
 /logs/
-/shared/config/*.js
+/shared/config/*
 /test*.js
 
 !/shared/config/.default.js
