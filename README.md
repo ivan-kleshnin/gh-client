@@ -14,3 +14,11 @@ $ npm install; bower install; bin/install
 $ npm run dev     [terminal #1]
 $ npm run nodemon [terminal #2]
 ```
+
+
+## Prod Run
+
+```
+$ npm run build [terminal #1]
+$ npm run node  [terminal #2]
+```
