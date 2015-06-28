@@ -5,7 +5,7 @@
 ```
 $ wget https://github.com/ivan-kleshnin/git-issues/archive/master.zip; unzip master.zip -d git-issues; rm master.zip
 $ cd git-issues
-$ npm install; bower install; bin/install
+$ npm install; bin/install
 ```
 
 You may want to change `shared/config/*.js` environment-specific settings at this step.
