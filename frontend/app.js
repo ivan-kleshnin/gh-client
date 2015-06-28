@@ -11,7 +11,7 @@ import state from "frontend/state";
 import routes from "frontend/routes";
 
 // Styles
-import "frontend/common/theme.less";
+import "frontend/styles/theme.less";
 
 // APP =============================================================================================
 window._router = createRouter({

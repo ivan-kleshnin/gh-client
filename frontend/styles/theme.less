@@ -1,0 +1,120 @@
+// VARIABLES =======================================================================================
+@import "~bootstrap/less/variables";
+
+@import "~bootstrap-ext/less/variables";
+
+@import "~frontend/styles/variables";
+
+// MIXINS ==========================================================================================
+@import "~bootstrap/less/mixins";
+@import "~bootstrap/less/mixins/grid-framework";
+@import "~bootstrap/less/mixins/grid";
+@import "~bootstrap/less/mixins/opacity";
+@import "~bootstrap/less/mixins/alerts";
+
+@import "~bootstrap-ext/less/mixins";
+
+// STYLES ==========================================================================================
+@import "~bootstrap/less/scaffolding";
+@import "~bootstrap/less/normalize";
+@import "~bootstrap/less/utilities";
+@import "~bootstrap/less/responsive-utilities";
+@import "~bootstrap/less/type";
+@import "~bootstrap/less/grid";
+@import "~bootstrap/less/forms";
+@import "~bootstrap/less/badges";
+@import "~bootstrap/less/labels";
+@import "~bootstrap/less/buttons";
+@import "~bootstrap/less/button-groups";
+@import "~bootstrap/less/panels";
+@import "~bootstrap/less/navs";
+@import "~bootstrap/less/thumbnails";
+@import "~bootstrap/less/media";
+@import "~bootstrap/less/alerts";
+@import "~bootstrap/less/grid";
+@import "~bootstrap/less/close";
+
+@import "~bootstrap-ext/less/scaffolding";
+@import "~bootstrap-ext/less/utilities";
+@import "~bootstrap-ext/less/type";
+@import "~bootstrap-ext/less/forms";
+@import "~bootstrap-ext/less/badges";
+@import "~bootstrap-ext/less/labels";
+@import "~bootstrap-ext/less/buttons";
+@import "~bootstrap-ext/less/panels";
+@import "~bootstrap-ext/less/alerts";
+
+@import "~font-awesome/less/font-awesome";
+
+@import "~frontend/styles/layout";
+@import "~frontend/styles/animation";
+@import "~frontend/styles/errors";
+@import "~frontend/styles/form";
+
+.thumbnail {
+  width: 100%;
+  height: 200px;
+  padding: 0;
+}
+
+.actions {
+  padding-top: @line-height-computed / 2;
+  padding-bottom: @line-height-computed / 2;
+  background: @gray-lighter;
+  border-bottom: 1px solid darken(@gray-lighter, 10%);
+}
+
+.index-alert {
+  position: fixed;
+  z-index: @zindex-modal;
+  &.top-right {
+    top: @line-height-computed / 2;
+    right: @line-height-computed;
+  }
+  &.top-left {
+    top: @line-height-computed / 2;
+    left: @line-height-computed;
+  }
+  &.bottom-left {
+    bottom: @line-height-computed / 2;
+    left: @line-height-computed;
+  }
+  &.bottom-right {
+    bottom: @line-height-computed / 2;
+    right: @line-height-computed;
+  }
+  .item {
+    position: relative;
+    margin: @line-height-computed / 2;
+  }
+}
+
+.gear {
+  @size: 12em;
+  margin: 0 auto;
+  color: @gray-light;
+  font-size: @size;
+  text-align: center;
+  @media (max-width: @screen-sm-min) {
+    font-size: @size * 0.75;
+  }
+  @media (max-width: @screen-xs-min) {
+    font-size: @size * 0.5;
+  }
+  &.lg {
+    @size: 15em;
+    font-size: @size;
+  }
+  &.sm {
+    @size: 8em;
+    font-size: @size;
+  }
+  &.xs {
+    @size: 5em;
+    font-size: @size;
+  }
+  &.fa-stack {
+    display: block;
+  }
+}
+
